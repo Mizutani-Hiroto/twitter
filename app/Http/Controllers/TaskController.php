@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
+use App\Task;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        $tasks = Task::all();
+        
+        return view('tasks.index',compact('tasks'));
         //
     }
 
@@ -24,6 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
+        return view('tasks.create');
         //
     }
 
@@ -35,28 +39,36 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $task =new Task();
+        $task->title = $request->input('title');
+        $task->content = $request->input('content');
+        $task->save();
+        
+        return redirect()->route('tasks.index',['id' =>$task->id])->with('message','Task was successfully created.');
         //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Task $task)
     {
+        return view('tasks.show',compact('task'));
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Task $task)
     {
+        return view('tasks.edit',compact('task'));
         //
     }
 
@@ -64,22 +76,30 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Task $task)
     {
+        $task->title = $request->input('title');
+        $task->content = $request->input('content');
+        $task->save();
+        
+        return redirect()->route('tasks.show',['id' => $task->id])->with('message','Task was successfully updated.');
         //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Task $task)
     {
+        $task->delete();
+        
+        return redirect()->route('tasks.index');
         //
     }
 }
