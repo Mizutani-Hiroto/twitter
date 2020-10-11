@@ -5,6 +5,8 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
+        @component('components.header')
+        @endcomponent
         <div class="container">
             @yield('content')
         </div>
