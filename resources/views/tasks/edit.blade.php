@@ -4,12 +4,23 @@
 
 @section('content')
 
-  <form method="TASK" action="/tasks/{{ $task->id }}"
+ <h1>Editing Post</h1>
+
+  <form method="POST" action="/tasks/{{ $task->id }}">
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="PUT">
-    <input type="text" name="title" value="{{ $task->title }}">
-    <input type="text" name="content" value="{{ $task->content }}">
-    <input type="submit">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Title</label>
+      <input type="text" class="form-control" aria-describedby="emailHelp" name="title" value="{{ $task->title }}">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Content</label>
+      <textarea class="form-control" name="content">{{ $task->content }}</textarea>
+    </div>
+      <button type="submit" class="btn btn-outline-primary">Submit</button>
   </form>
+
+  <a href="/tasks/{{ $task->id }}">Show</a> 
+  <a href="/tasks">Back</a>
   
 @endsection
