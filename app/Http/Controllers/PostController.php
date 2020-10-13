@@ -14,7 +14,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+        
+        return view('posts.index',compact('posts'));
+        //indexは作成した投稿の一覧です
     }
 
     /**
@@ -24,6 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
+        return voew('posts.create');
         //
     }
 
@@ -35,7 +39,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post();
+        //新たにポストモデルのデータを作成。
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        //titleやcontentに$requestに保存されているPostモデルのカラム（ある項目）ごと受け取る
+        $post->save();
+        return redirect()->route('posts.show',['id' =>$post->id])->with('message','Post was successfully created.');
+        //$oist->save();で、作成したモデルのデータを保存。
+        //posts/:idというURLにリダイレクトする。
     }
 
     /**
@@ -46,7 +58,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show',compact('post'));
+        //compact('post')でビューに変数を渡すことができる
     }
 
     /**
@@ -57,6 +70,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        return view('posts.edit',compact('post'));
         //
     }
 
@@ -69,6 +83,11 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post->save();
+
+        return redirect()->route('posts.show', ['id' => $post->id])->with('message', 'Post was successfully updated.');
         //
     }
 
@@ -80,6 +99,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $post->delete();
+        
+        return redirect()->route('posts.index');
         //
     }
 }

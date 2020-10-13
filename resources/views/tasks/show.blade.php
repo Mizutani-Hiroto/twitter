@@ -16,7 +16,7 @@
       <p class="card-text">{{ $task->content }}</p>
 
       <div class="d-flex" style="height: 36.4px;">
-        <a href="/tasks/{{ $task->id }}" class="btn btn-outline-primary">Show</a>
+        <a href="/tasks" class="btn btn-outline-primary">Show</a>
         <a href="/tasks/{{ $task->id }}/edit" class="btn btn-outline-primary">Edit</a>
         <form action="/tasks/{{ $task->id }}" method="POST" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
           <input type="hidden" name="_method" value="DELETE">
