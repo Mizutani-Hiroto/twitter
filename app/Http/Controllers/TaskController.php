@@ -39,6 +39,10 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            ]);
         $task =new Task();
         $task->title = $request->input('title');
         $task->content = $request->input('content');
@@ -81,6 +85,10 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            ]);
         $task->title = $request->input('title');
         $task->content = $request->input('content');
         $task->save();
