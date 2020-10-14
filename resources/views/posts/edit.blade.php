@@ -1,8 +1,10 @@
-@extends('layouts','layouts')
+@extends('layouts.layouts')
 
 @section('title','Simple Board')
 
 @section('content')
+
+<h1>New Post</h1>
 
   <form method="POST" action="/posts/{{ $post->id }}">
     {{ csrf_field() }}

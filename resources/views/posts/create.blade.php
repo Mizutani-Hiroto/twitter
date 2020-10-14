@@ -1,6 +1,6 @@
-@extends('layouts',layouts')
+@extends('layouts.layouts')
 
-@section('titile','Simple Board')
+@section('title','Simple Board')
 
 @section('content')
 

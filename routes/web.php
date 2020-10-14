@@ -15,11 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/', 'PostController@index');
-
-Route::resource('logins','LoginsController');
+Route::resource('logins','LoginController');
 
 Route::resource('tasks','TaskController');
+
+Route::get('/', 'PostController@index');
 
 Route::resource('posts','PostController');
 
