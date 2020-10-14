@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/', 'PostController@index');
+
 Route::resource('logins','LoginsController');
 
 Route::resource('tasks','TaskController');
