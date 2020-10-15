@@ -39,6 +39,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            ]);
+            //validationの設定
         $post = new Post();
         //新たにポストモデルのデータを作成。
         $post->title = $request->input('title');
@@ -83,6 +88,10 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            ]);
         $post->title = $request->input('title');
         $post->content = $request->input('content');
         $post->save();
