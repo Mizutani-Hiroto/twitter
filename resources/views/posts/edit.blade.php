@@ -4,13 +4,23 @@
 
 @section('content')
 
-<h1>New Post</h1>
+<h1>Editing Post</h1>
 
   <form method="POST" action="/posts/{{ $post->id }}">
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="PUT">
-    <input type="text" name="title" value="{{ $post->title }}">
-    <input type="text" name="content" value="{{ $post->content }}">
-    <input type="submit">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Title</label>
+      <input type="text" clas="form-control" aria-describedby="emailHelp" name="title" value="{{ $post->title }}">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Control</label>
+      <textarea class="form-control" name="content">{{ $post->content }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-outline-primary">Submit</button>
   </form> 
+  
+  <a href="/posts/{{ $post->id }}">Show</a>
+  <a href="/posts">Back</a>
+  
   @endsection
